@@ -21,13 +21,11 @@ portfolio.get("/stats", (c) => {
   });
 });
 
-// Contact form submission
 portfolio.post("/contact", async (c) => {
   try {
     const body = await c.req.json();
     const validated = contactSchema.parse(body);
 
-    // TODO: Send email or save to database
     console.log("Contact form submission:", validated);
 
     return c.json({
@@ -36,10 +34,11 @@ portfolio.post("/contact", async (c) => {
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
+      // ✅ For Zod v4+, use .issues instead of .errors
       return c.json(
         {
           success: false,
-          errors: error.errors,
+          errors: error.issues, // ← Change from .errors to .issues
         },
         400
       );
