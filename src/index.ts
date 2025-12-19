@@ -3,7 +3,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { prettyJSON } from "hono/pretty-json";
-import portfolio from "./routes/portfolio";
+import portfolio from "./routes/portfolio.js";
 
 const app = new Hono();
 
